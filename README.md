@@ -24,6 +24,48 @@ This development environment comes pre-configured with:
 2. Wait for the Codespace to finish setting up (this may take a few minutes).
 3. Once the Codespace is ready, you can start developing!
 
+### To Create Near Account inside codespace.
+
+1. Codespace doesnt allow creation of account. So create near account in your local machine with the commands
+
+```bash
+near create-account <your-account-id.testnet> --useFaucet
+```
+
+2. Fetch the private key
+
+```bash
+near account export-account
+```
+
+3. Fetch the Public key
+
+```bash
+near account list-keys
+```
+
+4. In your codespace create the file and add the following and set the permissions
+
+```bash
+vim ~/.near-credentials/testnet/your-account-id.testnet.json
+
+{
+  "account_id": "your-account-id.testnet",
+  "public_key": "ed25519:YOUR_PUBLIC_KEY",
+  "private_key": "ed25519:YOUR_PRIVATE_KEY"
+}
+
+chmod 600 ~/.near-credentials/testnet/your-account-id.testnet.json
+```
+
+### Check your account state
+near state your-account-id.testnet --networkId testnet
+
+
+### set testnet as default
+echo 'export NEAR_ENV=testnet' >> ~/.bashrc
+source ~/.bashrc
+
 ## Customizing the Environment
 
 If you need to customize the development environment, you can modify the `.devcontainer/devcontainer.json` file in this repository.
